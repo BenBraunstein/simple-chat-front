@@ -34,7 +34,7 @@ function postMessage(form) {
     .then(resp => resp.json())
     .then(function(json) {
       grabMessages()
-      form.reset()
+      form.message.value = ""
     })
 }
 
