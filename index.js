@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 })
 
 function grabMessages() {
-  fetch("http://localhost:3000/messages")
+  fetch("https://fierce-wave-66462.herokuapp.com/messages")
     .then(resp => resp.json())
     .then(function(messages) {
       renderMessages(messages)
@@ -21,7 +21,7 @@ function grabMessages() {
 }
 
 function postMessage(form) {
-  fetch("http://localhost:3000/messages", {
+  fetch("https://fierce-wave-66462.herokuapp.com/messages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
