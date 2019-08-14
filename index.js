@@ -42,12 +42,16 @@ function renderMessages(messages) {
   const length = messages.length
   const mostRecent = messages.slice(length - 50)
   const list = document.querySelector("#message-list")
-  list.innerHTML = ""
+  // list.innerHTML = ""
   let newList = ""
   mostRecent.forEach(message => {
-    newList += makeLi(message)
+    if (!!!document.querySelector(`li[data-id='${message.id}']`)) {
+      newList += makeLi(message)
+    }
   })
-  list.innerHTML = newList
+  if (newList != "") {
+    list.innerHTML += newList
+  }
 }
 
 function makeLi(message) {
