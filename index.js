@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(e) {
-  let user = prompt("Please enter your name")
+  // Name can't be blank
+  let user = ""
+  while (user == "") {
+    user = prompt("Please enter your name")
+  }
   document.querySelector("#sender").value = user
   grabMessages()
   const refreshInterval = setInterval(function() {
     grabMessages()
-  }, 150)
+  }, 100)
   const form = document.querySelector("#chatForm")
   form.addEventListener("submit", function(e) {
     e.preventDefault()
@@ -42,7 +46,6 @@ function renderMessages(messages) {
   const length = messages.length
   const mostRecent = messages.slice(length - 50)
   const list = document.querySelector("#message-list")
-  // list.innerHTML = ""
   let newList = ""
   mostRecent.forEach(message => {
     if (!!!document.querySelector(`li[data-id='${message.id}']`)) {
@@ -55,7 +58,15 @@ function renderMessages(messages) {
 }
 
 function makeLi(message) {
+  // Some logic to make your own messages say You instead of your name
+  let sender = document.querySelector("#sender").value
+  if (message.sender == sender) {
+    sender = "You"
+  } else {
+    sender = message.sender
+  }
+  //prettier-ignore
   return `
-    <li data-id='${message.id}'>${message.sender}: ${message.message}</li>
+    <li data-id='${message.id}'><strong>${sender}:</strong>${message.message}</li>
     `
 }
